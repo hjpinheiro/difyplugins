@@ -48,10 +48,59 @@ Para o **Claude Sonnet 4** (modelo principal deste plugin):
 
 ## Instalação
 
-1. Copie este diretório para o diretório de plugins do Dify
-2. Instale as dependências: `pip install -r requirements.txt`
-3. Configure as credenciais do Google Cloud no Dify
-4. Selecione o modelo Claude Sonnet 4 ou outro modelo disponível
+### Opção 1: Importar via ZIP (Recomendado)
+
+1. **Construir o pacote do plugin:**
+   ```bash
+   chmod +x build.sh
+   ./build.sh v0.0.1
+   ```
+   Isto irá criar um ficheiro `vertex-ai-plugin-v0.0.1.zip` com a estrutura correta.
+
+2. **Importar no Dify:**
+   - Aceda à secção de Plugins no Dify
+   - Clique em "Install Plugin" ou "Add Plugin"
+   - Selecione "Import from local file"
+   - Faça upload do ficheiro `vertex-ai-plugin-v0.0.1.zip`
+
+3. **Configurar credenciais:**
+   - No Dify, vá às configurações do plugin
+   - Configure as credenciais do Google Cloud (Project ID, Location, Service Account Key)
+
+### Opção 2: Importar via GitHub Release
+
+1. **Preparar a Release:**
+   - Faça build do plugin: `./build.sh v0.0.1`
+   - Crie uma Release no GitHub
+   - **Anexe manualmente** o ficheiro `vertex-ai-plugin-v0.0.1.zip` aos assets da Release
+   - Não use o "Source code (zip)" automático - ele tem estrutura incorreta!
+
+2. **Importar no Dify:**
+   - No Dify, use "Import from URL"
+   - Cole o URL do repositório GitHub
+   - Selecione a Release
+   - Selecione o asset `vertex-ai-plugin-v0.0.1.zip` (não o Source code!)
+
+### Estrutura Correta do ZIP
+
+⚠️ **IMPORTANTE:** O Dify requer que o `manifest.yaml` esteja na raiz do ZIP:
+
+```
+✅ Correto:
+vertex-ai-plugin.zip
+├── manifest.yaml          ← Na raiz!
+├── provider/
+├── models/
+└── requirements.txt
+
+❌ Incorreto:
+plugin.zip
+└── difyplugins/           ← Pasta extra!
+    ├── manifest.yaml
+    └── ...
+```
+
+O script `build.sh` garante a estrutura correta automaticamente.
 
 ## Características
 
