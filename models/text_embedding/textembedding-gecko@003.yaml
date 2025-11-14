@@ -1,0 +1,14 @@
+model: textembedding-gecko@003
+label:
+  en_US: Text Embedding Gecko 003
+  zh_Hans: 文本嵌入 Gecko 003
+model_type: text_embedding
+model_properties:
+  context_size: 3072
+  max_chunks: 1
+  text_embedding_dim: 768
+parameter_rules: []
+pricing:
+  input: '0.00002'
+  unit: '0.001'
+  currency: USD
